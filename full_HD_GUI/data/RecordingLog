@@ -1,0 +1,369 @@
+Recording Log
+
+Subject 002
+
+Baseline: 3
+Arm position: 3
+Prolonged: 3
+New day: 1
+----------
+20190319
+
+- 141720 - Single DOF train
+- 142008 - Single DOF test - 86.61%
+
+- 142839 - Single DOF train
+- 143213 - Single DOF test - 90.97% (offline 1000 - 95.04% / 10000 - 98.68%)
+- 143625 - Multi DOF train
+- 143912 - Single DOF test - 69.72%
+- 144245 - Multi DOF test - 79.07%
+- 145205 - All gestures test - 59.39%
+
+- 145950 - Multi DOF train
+- 150217 - Multi DOF test - 71.88% (offline 1000 - 87.34% / 10000 - 82.89%)
+
+- 150859 - Single DOF train
+- 151213 - Single DOF test - 67.05% all 5 trials, 73.62% first trial only (offline 1000 - 81.09% / 10000 - 87.87%)
+
+20190320
+
+- 111251 - Single DOF train
+
+- 111952 - Single DOF train
+- 112507 - Single DOF test - 84.49% with mostly problems in rest, 91.11% without considering rest
+
+- 115200 - Flex train
+- 115302 - Ext train
+- 115404 - Thumb train
+
+- 122939 - Flex train
+- 123038 - Ext train
+- 123140 - Thumb train
+- 123347 - Flex test
+- 123450 - Ext test
+- 123658 - Thumb test
+
+	- SingleTrainSingleTest - 94.79% (offline 10000 - 98.28%; offline 1000 - 94.33%)
+
+- 123836 - Count train
+- 123947 - Other train
+- 124045 - Flex test
+- 124147 - Ext test
+- 124312 - Thumb test
+
+	- MultiTrainSingleTest - 84.21% (offline 10000 - 95.14%; offline 1000 - 92.61%)
+
+- 124426 - Count test
+- 124540 - Other test
+
+	- MultiTrainMultiTest - 79.19% (offline 10000 - 92.76%; offline 1000 - 91.61%)
+	- AllTrainAllTest - 82.30% (offline 10000 - 93.86%; offline 1000 - 91.67%)
+
+Offline HW implementation testing notes:
+- Floating point features, binary bundler
+	- Single 1 - 95.24%
+	- Single 2 - 88.06%
+	- Multi 2 - 77.47%
+	- All - 84.02%
+
+
+20190328
+
+- 110747 - Single DOF test (didn't save train) - 77.81%
+
+- 111352 - Single DOF train
+
+- 112231 - Single DOF train (maybe different arm position?)
+- 112529 - Single DOF test - 90.58%
+
+- 120109 - Single DOF train
+- 120407 - Single DOF test feedback - 94.75%
+- 121120 - Single DOF test no feedback - 90.29%
+
+- 162238 - Single DOF train
+- 162620 - Single DOF test - 85.20%
+- 162930 - Single DOF test - 85.72%
+
+Exp A - arm position (no good)
+
+ExpAtrain
+- 163346 - Flex train
+- 163445 - Ext train
+- 163546 - Thumb train
+ExpAtest1 - 90.78%
+- 163720 - Flex test
+- 163819 - Ext test
+- 163920 - Thumb test
+ExpAtest2 - 95.29%
+- 164544 - Flex test
+- 164643 - Ext test
+- 164745 - Thumb test
+ExpAtest3 - 95.61%
+- 165111 - Flex test
+- 165210 - Ext test
+- 165317 - Thumb test
+ExpAtestnew1 - 82.52%
+- 165831 - Flex test new
+- 165932 - Ext test new
+- 170038 - Thumb test new
+ExpAupdate1 - missed one of the modelabel commands
+- 170207 - Flex update
+- 170308 - Ext update
+- 170408 - Thumb update
+ExpAupdate2 - tried to overwrite other update
+- 170642 - Flex update
+- 170807 - Ext update
+- 170916 - Thumb update
+
+Exp B - arm position (no good)
+
+ExpBtrain
+- 172419 - Flex train
+- 172518 - Ext train
+- 172617 - Thumb train
+ExpBtest1 - 93.90% (blind)
+- 172838 - Flex test
+- 172937 - Ext test
+- 173040 - Thumb test
+ExpBtestnew1 - 71.90% (blind)
+- 173317 - Flex test new
+- 173420 - Ext test new
+- 173525 - Thumb test new
+ExbBupdate1
+- 174503 - Flex update
+- 174602 - Ext update
+- 174706 - Thumb update
+ExpBtestupdatenew1 - 76.82% (blind)
+- 175320 - Flex test
+- 175419 - Ext test
+- 175521 - Thumb test
+ExpBtestupdatebase1 - 86.61% (blind)
+- 175706 - Flex test
+- 175805 - Ext test 
+- 175907 - Thumb test
+ExpBtestupdatenew2 - 73.84% (blind)
+- 180337
+- 180436
+- 180542
+ExpBtestupdatenew3 - 72.41% (feedback)
+- 180749
+- 180848
+- 180954
+ExpBtestupdatebase2 - 79.07% (feedback)
+- 181156
+- 181257
+- 181401
+ExpBtestupdatenew4 - 76.61% (feedback)
+- 181536
+- 181744
+- 181843
+
+20190401
+
+Exp C - no update
+
+ExpCtrain - middle extension training lasted too long
+- 111047
+- 111148
+- 111253
+ExpCtest - 94.47%
+- 111421
+- 111523
+- 111623
+
+Exp D - arm position (good - 1)
+
+ExpDtrain
+- 111945
+- 112047
+- 112151
+ExpDtest1 (blind) - 99.33%
+- 112340
+- 112441
+- 112542
+ExpDtest2 (feedback) - 93.86%
+- 112735
+- 112839
+- 114059
+ExpDtestnew1 (blind) - 62.48%
+- 114503
+- 114602
+- 114702
+ExpDtestnew2 (feedback) - 87.09%
+- 114914
+- 115014
+- 115117
+ExpDupdate
+- 115305
+- 115405
+- 115503
+ExpDtestupdatenew1 (blind) - 84.74%
+- 115639
+- 115737
+- 115837
+ExpDtestupdatenew2 (feedback) - 94.06%
+- 120059
+- 120205
+- 120437
+ExpDtestupdatebase1 (blind) - 91.25%
+- 120651
+- 120750
+- 120858
+ExpDtestupdatebase2 (feedback) - 92.19%
+- 121040
+- 121138
+- 121451
+
+Exp E - prolong (good - 1)
+
+ExpEtest1 (blind) - 99.24%
+ExpEtest2 (feedback) - 94.23% --> used this
+ExpEtest3 (blind) - 95.97%
+ExpEtest4 (blind) - 93.56%
+
+95.75%
+
+ExpEtestnew1 (blind) - 89.42%
+ExpEtestnew2 (feedback) - 85.78% --> used this
+ExpEtestnew3 (blind) - 85.10%
+ExpEtestnew4 (feedback) - 88.41%
+
+87.18%
+
+ExpEtestupdatenew1 (blind) - 94.30%
+ExpEtestudpatenew2 (feedback) - 85.71% --> used this
+ExpEtestupdatenew3 (blind) - 89.47%
+ExpEtestudpatenew4 (feedback) - 90.94%
+
+90.11%
+
+Exp F - baseline multi (good - 1)
+
+ExpFtest1 (blind) - 99.52%
+ExpFtest2 (feedback) - 99.90%
+
+99.71%
+
+ExpFtestappend1 (blind) - 94.38%
+ExpFtestappend2 (feedback) - 92.80%
+
+93.59%
+
+ExpFtestnew1 (blind) - 89.70%
+ExpFtestnew2 (feedback) - 97.66%
+
+93.68%
+
+
+Exp G - prolong (good - 2)
+
+ExpGtest1 (blind) - 99.53%
+ExpGtest2 (feedback) - 100%
+
+ExpGtestnew1 (blind) - 77.28%
+ExpGtestnew2 (feedback) - 70.48%
+
+ExpGtestupdatenew1 (blind) - 81.73%
+ExpGtestupdatenew2 (feedback) - 83.14%
+
+ExpGnewcontexttest1 (blind) - 99.62%
+ExpGnewcontexttest2 (blind) - 98.26%
+
+Exp H - baseline multi (good - 2)
+
+ExpHtest1 (blind) - 98.00%
+ExpHtest2 (feedback) - 99.04%
+
+98.52%
+
+ExpHtestappend1 (blind) - 92.84%
+ExpHtestappend2 (feedback) - 93.11%
+
+92.98%
+
+ExpHtestnew1 (blind) - 87.49%
+ExpHtestnew2 (feedback) - 80.08%
+
+83.79%
+
+Exp I - baseline multi (good - 3)
+
+ExpItest (feedback) - 97.72%
+
+ExpItestappend (feedback) - 94.01%
+
+ExpItestnew (feedback) - 96.10%
+
+
+Exp J - arm position (good - 2)
+
+ExpJtest - 98.94%
+ExpJtestnew - 90.10%
+ExpJtestupdatenew - 96.73%
+ExpJtestupdatebase - 94.28%
+
+Exp K - new wear (good - 1)
+
+ExpKtest - 99.23%
+ExpKtestnew - 90.10%
+ExpKtestupdatenew1 - 95.77%
+ExpKtestupdatenew2 - 97.71% --> used this one
+
+
+Exp L - prolong (good - 3)
+
+ExpLtest - 96.86%
+ExpLtestnew - 84.69%
+ExpLtestupdatenew - 99.62%
+
+Exp M - arm position (good - 3)
+
+ExpMtest - 99.62%
+ExpMtestnew - 93.47%
+ExpMtestupdatenew - 99.04%
+ExpMtestupdatebase - 97.88%
+
+Exp N - new wear (good - 2)
+
+ExpNtest - 99.13%
+ExpNtestnew - 96.20%
+ExpNtestupdatenew - 98.94%
+
+Exp O - new wear
+
+ExpOtest - 99.62%
+ExpOtestnew - 94.40%
+ExpOtestupdatenew - 95.39%
+
+-----------
+
+Subject 001
+
+Baseline: 3
+Arm position: 3
+Prolonged: 3
+New day: 3
+
+ExpA - Arm position
+
+ExpB - prolonged wear
+
+ExpC - Arm position
+
+ExpD - baseline multi
+
+ExpE - baseline multi
+
+ExpF - New day
+
+ExpG - Arm position
+
+ExpH - baseline multi
+
+ExpI - New day
+
+ExpJ - Prolonged wear
+
+ExpK - prolonged wear
+
+ExpL - New day
