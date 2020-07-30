@@ -84,7 +84,7 @@ function [L_SAMPL_DATA, SAMPL_DATA] = genTrainData (data, labels, trainingFrac, 
 	SAMPL_DATA   = [SAMPL_DATA; (data(L7(Inx7), :))];
 end
 
-function [CiM, iM] = initItemMemories (D, MAXL, channels,extra_enable)
+%function [CiM, iM] = initItemMemories (D, MAXL, channels,extra_enable)
 %
 % DESCRIPTION   : initialize the item Memory  
 %
@@ -96,38 +96,114 @@ function [CiM, iM] = initItemMemories (D, MAXL, channels,extra_enable)
 %   iM          : item memory for IDs of channels
 %   CiM         : continious item memory for value of a channel
  
+%     % MAXL = 21;
+% 	CiM = containers.Map ('KeyType','double','ValueType','any');
+% 	iM  = containers.Map ('KeyType','double','ValueType','any');
+%     rng('default');
+%     rng(1);
+%     
+%     
+%     
+%     for i = 1 : channels
+%         iM(i) = genRandomHV (D);
+%     end
+%     
+%     if (extra_enable)
+%         for i = 1 : channels
+%             iM(i) = genRandomHV (D);
+%         end
+%     end
+% 
+%     initHV = genRandomHV (D);
+% 	currentHV = initHV;
+% 	randomIndex = randperm (D);
+% 	
+% %     for i = 0:1:MAXL
+% %         CiM(i) = currentHV; 
+% %         SP = floor(D/2/MAXL);
+% % 		startInx = (i*SP) + 1;
+% % 		endInx = ((i+1)*SP) + 1;
+% % 		currentHV (randomIndex(startInx : endInx)) = not(currentHV (randomIndex(startInx: endInx)));
+% %     end
+%     for i = 0:1:MAXL
+%         CiM(i) = currentHV; 
+%         currentHV = genRandomHV(D);
+%     end
+%end
+function [CiMC, iMC, CiMR, iMR] = initItemMemories (D, MAXLC, channelsC, MAXLR, channelsR)
+%
+% DESCRIPTION    : initialize the item Memory  
+%
+% INPUTS:
+%   D            : Dimension of vectors
+%   MAXLC        : # of vectors in CiM for conditions
+%   channelsC    : Number of acquisition channels for conditions
+%   MAXLR        : # of vectors in CiM for results
+%   channelsR    : Number of acquisition channels for results
+
+% OUTPUTS:
+%   iMC          : item memory for IDs of channels for conditions
+%   CiMC         : continious item memory for value of a channel for
+%   conditions
+%   iMR          : item memory for IDs of channels for results
+%   CiMR         : continious item memory for value of a channel for
+%   results
+ 
     % MAXL = 21;
-	CiM = containers.Map ('KeyType','double','ValueType','any');
-	iM  = containers.Map ('KeyType','double','ValueType','any');
+    CiMC = containers.Map ('KeyType','double','ValueType','any');
+    iMC  = containers.Map ('KeyType','double','ValueType','any');
+    CiMR = containers.Map ('KeyType','double','ValueType','any');
+    iMR  = containers.Map ('KeyType','double','ValueType','any');
     rng('default');
     rng(1);
     
-    
-    
-    for i = 1 : channels
-        iM(i) = genRandomHV (D);
-    end
-    
-    if (extra_enable)
-        for i = 1 : channels
-            iM(i) = genRandomHV (D);
+    if channelsC == channelsR
+        for i = 1 : channelsC
+            iMC(i) = genRandomHV (D);
+            iMR(i) = genRandomHV (D);
+        end
+    else
+        for i = 1 : channelsC
+            iMC(i) = genRandomHV (D);
+        end
+
+        for i = 1 : channelsR
+            iMR(i) = genRandomHV (D);
         end
     end
 
-    initHV = genRandomHV (D);
-	currentHV = initHV;
-	randomIndex = randperm (D);
-	
 %     for i = 0:1:MAXL
 %         CiM(i) = currentHV; 
 %         SP = floor(D/2/MAXL);
-% 		startInx = (i*SP) + 1;
-% 		endInx = ((i+1)*SP) + 1;
-% 		currentHV (randomIndex(startInx : endInx)) = not(currentHV (randomIndex(startInx: endInx)));
+%       startInx = (i*SP) + 1;
+%       endInx = ((i+1)*SP) + 1;
+%       currentHV (randomIndex(startInx : endInx)) = not(currentHV (randomIndex(startInx: endInx)));
 %     end
-    for i = 0:1:MAXL
-        CiM(i) = currentHV; 
-        currentHV = genRandomHV(D);
+
+    if MAXLC==MAXLR
+        initHVC = genRandomHV (D);
+        currentHVC = initHVC;
+        initHVR = genRandomHV (D);
+        currentHVR = initHVR;
+        for i = 0:1:MAXLC
+            CiMC(i) = currentHVC; 
+            currentHVC = genRandomHV(D);
+            CiMR(i) = currentHVR;
+            currentHVR = genRandomHV(D);
+        end
+    else
+        initHV = genRandomHV (D);
+        currentHV = initHV;
+        for i = 0:1:MAXLC
+            CiMC(i) = currentHV; 
+            currentHV = genRandomHV(D);
+        end
+        initHV = genRandomHV (D);
+        currentHV = initHV;
+        for i = 0:1:MAXLR
+            CiMR(i) = currentHV; 
+            currentHV = genRandomHV(D);
+        end
     end
 end
 
